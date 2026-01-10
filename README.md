@@ -29,9 +29,8 @@ that project look at the Assembly for a reference design with all included
 components, including stand-ins for various knobs and switches.
 
 The design is oriented around providing a standardized base, with swappable
-control scheme panels. Each panel has a working area of 60mm wide by 100mm tall
-- see BigPanelTemplate in the FreeCAD project for a template. Two panels may be
-  combined to create a "wide" 128mm by 100mm panel.
+control scheme panels. Each panel has a working area of 60mm wide by 100mm tall - see BigPanelTemplate in the FreeCAD project for a template. Two panels may be
+combined to create a "wide" 128mm by 100mm panel.
 
 The core structure provides space for up to 6 panels - two on the front face,
 two on the top face (with an approximately 30 degree slope), and one on each
