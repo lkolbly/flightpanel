@@ -2,6 +2,7 @@
 
 [target.thumbv6m-none-eabi]
 runner = 'probe-rs run --chip STM32F072C8Tx'
+#rustflags = ["-Zunstable-options", "-Cpanic=immediate-abort"]
 
 [build]
 target = "thumbv6m-none-eabi"
@@ -11,4 +12,5 @@ DEFMT_LOG = "trace"
 
 [unstable]
 build-std = ["core"]
-build-std-features = ["panic_immediate_abort"]
+#build-std-features = ["panic_immediate_abort"]
+panic-immediate-abort = false

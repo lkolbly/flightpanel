@@ -126,7 +126,7 @@ macro_rules! debug {
     };
 }
 
-macro_rules! info {
+/*macro_rules! info {
     ($s:literal $(, $x:expr)* $(,)?) => {
         {
             #[cfg(feature = "defmt")]
@@ -135,7 +135,7 @@ macro_rules! info {
             let _ = ($( & $x ),*);
         }
     };
-}
+}*/
 
 macro_rules! _warn {
     ($s:literal $(, $x:expr)* $(,)?) => {
@@ -233,7 +233,7 @@ pub(crate) use debug_assert;
 pub(crate) use debug_assert_eq;
 pub(crate) use debug_assert_ne;
 pub(crate) use error;
-pub(crate) use info;
+//pub(crate) use info;
 pub(crate) use panic;
 pub(crate) use todo;
 pub(crate) use trace;

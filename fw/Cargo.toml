@@ -1,21 +1,43 @@
+cargo-features = ["panic-immediate-abort"]
+
 [package]
 edition = "2024"
 name = "fw"
 version = "0.1.0"
 
 [dependencies]
-cortex-m = { version = "0.7.7", features = ["inline-asm", "critical-section-single-core"] }
+cortex-m = { version = "0.7.7", features = [
+    "inline-asm",
+    "critical-section-single-core",
+] }
 cortex-m-rt = "0.7.5"
 defmt = { version = "1.0.1", optional = true }
 defmt-rtt = { version = "1.1.0", optional = true }
-embassy-executor = { version = "0.9.1", features = ["arch-cortex-m", "executor-thread"] }
+embassy-executor = { version = "0.9.1", features = [
+    "arch-cortex-m",
+    "executor-thread",
+    "trace",
+] }
 embassy-futures = "0.1.2"
-embassy-stm32 = { version = "0.5.0", features = ["memory-x", "stm32f072c8", "time-driver-any", "exti", "unstable-pac"] }
+embassy-stm32 = { version = "0.5.0", features = [
+    "memory-x",
+    "stm32f072c8",
+    "time-driver-tim1",
+    "exti",
+    "unstable-pac",
+] }
 embassy-sync = "0.7.2"
-embassy-time = { version = "0.5.0", features = ["tick-hz-32_768"] }
+embassy-time = { version = "0.5.0", features = ["tick-hz-1_000_000"] }
 embassy-usb = "0.5.1"
-panic-halt = "1.0.0"
-panic-probe = { version = "1.0.0", features = ["print-defmt"], optional = true }
+embassy-embedded-hal = { git = "https://github.com/embassy-rs/embassy", ref = "bc0fe9d5102d33c10ccdb9c19d8c3875c6d7f6c9" }
+#panic-halt = "1.0.0"
+#panic-probe = { version = "1.0.0", features = ["print-defmt"], optional = true }
+sync-unsafe-cell = "0.1.1"
+usbd-hid = "0.9.0"
+heapless = "0.9.2"
+embedded-hal = "1.0.0"
+#static_cell = "2.1.1"
+embedded-hal-async = "*"
 
 [[bin]]
 name = "fw"
@@ -33,16 +55,17 @@ debug = false
 lto = true
 opt-level = "z"
 incremental = true
+panic = "abort"
 
 [features]
 defmt = ["dep:defmt"]
 defmt-rtt = ["dep:defmt-rtt"]
-panic-probe = ["dep:panic-probe"]
+#panic-probe = ["dep:panic-probe"]
 default = ["debug"]
 debug = [
     "defmt",
     "defmt-rtt",
-    "panic-probe",
+    #"panic-probe",
     "embassy-executor/defmt",
     "embassy-sync/defmt",
     "embassy-futures/defmt",
@@ -50,3 +73,11 @@ debug = [
     "embassy-time/defmt-timestamp-uptime",
     "embassy-stm32/defmt",
 ]
+
+[patch.crates-io]
+embassy-executor = { git = "https://github.com/embassy-rs/embassy", ref = "bc0fe9d5102d33c10ccdb9c19d8c3875c6d7f6c9" }
+embassy-futures = { git = "https://github.com/embassy-rs/embassy", ref = "bc0fe9d5102d33c10ccdb9c19d8c3875c6d7f6c9" }
+embassy-stm32 = { git = "https://github.com/embassy-rs/embassy", ref = "bc0fe9d5102d33c10ccdb9c19d8c3875c6d7f6c9" }
+embassy-sync = { git = "https://github.com/embassy-rs/embassy", ref = "bc0fe9d5102d33c10ccdb9c19d8c3875c6d7f6c9" }
+embassy-time = { git = "https://github.com/embassy-rs/embassy", ref = "bc0fe9d5102d33c10ccdb9c19d8c3875c6d7f6c9" }
+embassy-usb = { git = "https://github.com/embassy-rs/embassy", ref = "bc0fe9d5102d33c10ccdb9c19d8c3875c6d7f6c9" }

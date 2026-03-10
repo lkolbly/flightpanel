@@ -1,12 +1,17 @@
 [tasks.build]
 command = "cargo"
+toolchain = "nightly"
 args = ["build", "--release"]
 
 [tasks.size]
 command = "cargo"
+toolchain = "nightly"
 args = ["size", "--release"]
 
 [tasks.elf]
 command = "cp"
-args = ["target/thumbv6m-none-eabi/release/fw", "target/thumbv6m-none-eabi/release/fw.elf"]
+args = [
+    "target/thumbv6m-none-eabi/release/fw",
+    "target/thumbv6m-none-eabi/release/fw.elf",
+]
 dependencies = ["build", "size"]
